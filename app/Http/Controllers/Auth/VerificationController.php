@@ -13,30 +13,33 @@ class VerificationController extends Controller
     | Email Verification Controller
     |--------------------------------------------------------------------------
     |
-    | This controller is responsible for handling email verification for any
-    | user that recently registered with the application. Emails may also
-    | be re-sent if the user didn't receive the original email message.
+    | Controller ini bertanggung jawab untuk menangani verifikasi email bagi
+    | pengguna yang baru saja mendaftar di aplikasi. Email juga dapat
+    | dikirim ulang jika pengguna tidak menerima pesan email yang asli.
     |
     */
 
     use VerifiesEmails;
 
     /**
-     * Where to redirect users after verification.
+     * i mana untuk mengarahkan pengguna setelah verifikasi.
      *
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
-     * Create a new controller instance.
-     *
+     * Membuat instance controller baru.
      * @return void
      */
+    /*Konstruktor untuk mengatur middleware yang digunakan pada controller ini */
     public function __construct()
     {
+        /*Menggunakan auth untuk memastikan pengguna terautentikasi */
         $this->middleware('auth');
+        /*Menggunakan middleware untuk memastikan pengguna telah mengirimkan email */
         $this->middleware('signed')->only('verify');
+        /*Menggunakan throttle untuk membatasi permintaan verifikasi email */
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
 }

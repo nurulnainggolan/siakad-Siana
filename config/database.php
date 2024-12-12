@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Str;
 
+/**
+ * Pengelolaan database yang memberikan fleksibilitas dan kemudahan \
+ * Mengatur koneksi database yang digunakan
+ */
 return [
 
     /*
@@ -9,9 +13,7 @@ return [
     | Default Database Connection Name
     |--------------------------------------------------------------------------
     |
-    | Here you may specify which of the database connections below you wish
-    | to use as your default connection for all database work. Of course
-    | you may use many connections at once using the Database library.
+    | Menentukan koneksi databaese mana yang akan digunakan sebagai default
     |
     */
 
@@ -31,10 +33,12 @@ return [
     | so make sure you have the driver for your particular database of
     | choice installed on your machine before you begin development.
     |
+    |Mengkonfigurasi koneksi database yang akan digunakan
     */
 
     'connections' => [
 
+        /*Konfigurasi untuk koneksi SQLite */
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DATABASE_URL'),
@@ -43,45 +47,48 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
 
+        /*Konfigurasi untuk koneksi MySQL */
         'mysql' => [
-            'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
+            'driver' => 'mysql', //nama driver
+            'url' => env('DATABASE_URL'),   //Mengambil URL database dari environment variable DATABASE_URL jika tersedia
+            'host' => env('DB_HOST', '127.0.0.1'), //localhost
+            'port' => env('DB_PORT', '3306'),   //port
+            'database' => env('DB_DATABASE', 'forge'), //nama database yang digunakan, forge (default)
+            'username' => env('DB_USERNAME', 'forge'), //nama pengguna untuk mengakses database
+            'password' => env('DB_PASSWORD', ''),      //password mengakses database
+            'unix_socket' => env('DB_SOCKET', ''),     //koneksi lokal tanpa IP
+            'charset' => 'utf8mb4',                     //mendukung karakter unicode 
+            'collation' => 'utf8mb4_unicode_ci',    //Menentukan charset
+            'prefix' => '',   //tabel prefix
+            'prefix_indexes' => true, //menentukan menggunakn prefix tabel
+            'strict' => true, //mengaktifkan mode ketat
+            'engine' => null, //menggunakn innoDB
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
 
+        /*pgsql = PostgreSQL => sebagai sistem manajemen basis data */
         'pgsql' => [
-            'driver' => 'pgsql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
+            'driver' => 'pgsql', //nama driver
+            'url' => env('DATABASE_URL'),  //agar dapat mengakses database dari environment variable DATABASE_URL
+            'host' => env('DB_HOST', '127.0.0.1'), //alamat localhost
+            'port' => env('DB_PORT', '5432'),   //port
             'database' => env('DB_DATABASE', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
+            'charset' => 'utf8', //menggunakan charset utf8 mendukung multibahasa
             'prefix' => '',
-            'prefix_indexes' => true,
-            'schema' => 'public',
-            'sslmode' => 'prefer',
+            'prefix_indexes' => true, //menggunakan prefix tabel
+            'schema' => 'public', //membuat tabel yang sama namun dengan fungsi yang berbeda
+            'sslmode' => 'prefer', //menggunakan SSL yang tersedia
         ],
 
+        /*SQL Server, menghubungkan dengan database SQL Server*/
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', 'localhost'),
+            'host' => env('DB_HOST', 'localhost'), //mengambil nilai variabel dari file .env
             'port' => env('DB_PORT', '1433'),
             'database' => env('DB_DATABASE', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
@@ -115,18 +122,24 @@ return [
     | provides a richer body of commands than a typical key-value system
     | such as APC or Memcached. Laravel makes it easy to dig right in.
     |
+    |
+    |Fungsi untuk mengelola schema database
+    |Fungsi membantu menjaga keteraturan dalam pengelolaaa database (alat pengembangan laravel)
     */
 
     'redis' => [
 
+        /*Menentukan client, default */
         'client' => env('REDIS_CLIENT', 'phpredis'),
 
+        
         'options' => [
-            'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'cluster' => env('REDIS_CLUSTER', 'redis'), //cluster default, untuk membantu mencegah satu node dari kelebihan beban
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'), //menambahkan prefix pada setiap key disimpan di redis
         ],
 
         'default' => [
+            /*Mengatur URL redis */
             'url' => env('REDIS_URL'),
             'host' => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD', null),
@@ -134,6 +147,7 @@ return [
             'database' => env('REDIS_DB', '0'),
         ],
 
+        /*Mengatur URL Redis untuk chace  */
         'cache' => [
             'url' => env('REDIS_URL'),
             'host' => env('REDIS_HOST', '127.0.0.1'),

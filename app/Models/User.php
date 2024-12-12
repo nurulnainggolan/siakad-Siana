@@ -13,10 +13,12 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * TAtribut yang dapat diisi secara massal.
      *
      * @var array<int, string>
      */
+
+     /*Menentukan atribut yang dapat diisi secara massal */
     protected $fillable = [
         'name',
         'email',
@@ -27,17 +29,19 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Menentukan atribut yang harus disembunyikan.
      *
      * @var array<int, string>
      */
+
+     /*Menentukan atribut yang disembunyikan */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
     /**
-     * The attributes that should be cast.
+     * Atribut yang harus di-cast ke tipe tertentu.
      *
      * @var array<string, string>
      */
@@ -45,11 +49,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /*Mendapatkan NIP data guru berdasarkan NIP */
     public function guru($id) {
         $guru = Guru::where('nip', $id)->first();
         return $guru;
     }
 
+    /*Mendapatkan data siswa berdasarkan NIS */
     public function siswa($id) {
         $siswa = Siswa::where('nis', $id)->first();
         return $siswa;

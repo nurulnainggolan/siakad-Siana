@@ -98,6 +98,18 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="jurusan_id">Jurusan</label>
+                                        <select id="jurusan_id" name="jurusan_id" class="select2 form-control ">
+                                            <option value="">-- Pilih Juruan --</option>
+                                            @foreach ($jurusan as $data)
+                                                <option value="{{ $data->id }}">{{ $data->nama_jurusan }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    
                                     <div class="modal-footer bg-whitesmoke br">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
                                         <button type="submit" class="btn btn-primary">Simpan</button>

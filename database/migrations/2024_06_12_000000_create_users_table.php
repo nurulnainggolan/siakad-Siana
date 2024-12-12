@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('roles');
+            $table->string('roles')->default('user');
             $table->rememberToken();
             $table->string('nis')->nullable();
             $table->string('nip')->nullable();
@@ -34,6 +34,9 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('roles')->change();
+        });
     }
 }
+

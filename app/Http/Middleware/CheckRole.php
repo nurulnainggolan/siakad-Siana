@@ -16,9 +16,12 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, ...$roles)
     {
+        /*Memeriksa apakah peran pengguna saat ini ada dalam daftar peran yang diizinkan */
         if(in_array($request->user()->roles,$roles)) {
+            /*Jika peran cocok, lanjutkan ke request berikutnya */
             return $next($request);
         }
+        /*Jika tidak, kembali ke halaman sebelumnya */
         return redirect()->back();
     }
 }

@@ -8,8 +8,9 @@ use Throwable;
 class Handler extends ExceptionHandler
 {
     /**
-     * A list of the exception types that are not reported.
-     *
+     * Daftar jenis pengecualian yang tidak dilaporkan
+     *Daftar ini berisi pengecualian-pengecualian yang tidak perlu dilaporkan ke dalam log aplikasi.
+     * Jika ada pengecualian yang ada di dalam array ini, pengecualian tersebut akan diabaikan dan tidak dicatat.
      * @var array<int, class-string<Throwable>>
      */
     protected $dontReport = [
@@ -17,7 +18,10 @@ class Handler extends ExceptionHandler
     ];
 
     /**
-     * A list of the inputs that are never flashed for validation exceptions.
+     * Daftar input yang tidak pernah diproses untuk pengecualian validasi.
+     *
+     * Daftar ini berisi input yang tidak akan dibawa saat terjadi pengecualian validasi.
+     * Biasanya, data sensitif seperti password yang tidak ingin terlihat dalam log.
      *
      * @var array<int, string>
      */

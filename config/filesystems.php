@@ -1,5 +1,10 @@
 <?php
 
+
+/***
+ * Penglolaan file dalam aplikasi laravel, memberikan struktur dan pengaturan
+ * yang diperlukan untuk menyimpan dan mengakses file.
+ */
 return [
 
     /*
@@ -13,6 +18,7 @@ return [
     |
     */
 
+    /*Menentukan disk default */
     'default' => env('FILESYSTEM_DRIVER', 'local'),
 
     /*

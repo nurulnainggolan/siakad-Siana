@@ -1,10 +1,10 @@
-@extends('layouts.main')
+@extends('layouts.main') 
 @section('title', 'Dashboard')
 
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Selamat datang pak/bu {{ Auth::user()->name }}</h1>
+        <h1>Selamat Datang di Sistem Akademik Sekolah, {{ Auth::user()->name }}</h1>
     </div>
 
     <div class="section-body">
@@ -17,7 +17,7 @@
                             <i class="fas fa-book"></i>
                         </div>
                         <h4>Jadwal Mengajar</h4>
-                        <div class="card-description">Berikut list jadwal kelas tempat mengajaar anda</div>
+                        
                     </div>
                     <div class="card-body p-0">
                         <div class="tickets-list">
@@ -46,7 +46,7 @@
 
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
-                    <div class="card-icon bg-success">
+                    <div class="card-icon bg-custom">
                         <i class="fas fa-book"></i>
                     </div>
                     <div class="card-wrap">
@@ -61,7 +61,7 @@
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
-                    <div class="card-icon bg-primary">
+                    <div class="card-icon bg-custom">
                         <i class="fas fa-list"></i>
                     </div>
                     <div class="card-wrap">

@@ -8,21 +8,26 @@ use Illuminate\Http\Request;
 class TrustProxies extends Middleware
 {
     /**
-     * The trusted proxies for this application.
+     * Daftar proxy yang dipercaya untuk aplikasi ini.
      *
      * @var array<int, string>|string|null
      */
+
+     /*Variabel ini menyimpan daftar proxy yang dipercaya oleh web*/
     protected $proxies;
 
     /**
-     * The headers that should be used to detect proxies.
+     * Header yang harus digunakan untuk mendeteksi proxy.
      *
      * @var int
      */
     protected $headers =
-        Request::HEADER_X_FORWARDED_FOR |
-        Request::HEADER_X_FORWARDED_HOST |
-        Request::HEADER_X_FORWARDED_PORT |
-        Request::HEADER_X_FORWARDED_PROTO |
-        Request::HEADER_X_FORWARDED_AWS_ELB;
+        Request::HEADER_X_FORWARDED_FOR |       //Header untuk alamat IP pengunjung
+        Request::HEADER_X_FORWARDED_HOST |      //Header untuk host asli
+        Request::HEADER_X_FORWARDED_PORT |      //Header untuk port asli
+        Request::HEADER_X_FORWARDED_PROTO |     //Header untuk protokol asli
+        Request::HEADER_X_FORWARDED_AWS_ELB;    //Header untuk mendeteksi load balancer AWS
 }
+
+
+/*Proxy merupakan layanan yang bertindak sebagai perantara antara pengguna(klien) dan server tujuan */

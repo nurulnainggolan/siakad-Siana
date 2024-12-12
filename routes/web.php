@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JadwalController;
@@ -7,6 +8,10 @@ use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\MateriController;
+use App\Http\Controllers\MeetingController;
+use App\Http\Controllers\NilaiController;
+use App\Http\Controllers\NilaiSiswaController;
+use App\Http\Controllers\PresensiMeetingController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\UserController;
@@ -37,6 +42,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/update-profile', [UserController::class, 'update'])->name('update.profile');
     Route::get('/edit-password', [UserController::class, 'editPassword'])->name('ubah-password');
     Route::patch('/update-password', [UserController::class, 'updatePassword'])->name('update-password');
+    Route::resource('absensi', AbsensiController::class);
+    Route::resource('meeting', MeetingController::class);
+    Route::resource('presensi', PresensiMeetingController::class);
+    Route::resource('/nilai', NilaiController::class);
+    Route::resource('/nilaiSiswa', NilaiSiswaController::class);
+    Route::get('/nilai', [NilaiController::class, 'index'])->name('nilai.index');
+    Route::post('/nilai', [NilaiController::class, 'store'])->name('nilai.store');
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:guru']], function () {
@@ -45,6 +57,7 @@ Route::group(['middleware' => ['auth', 'checkRole:guru']], function () {
     Route::resource('tugas', TugasController::class);
     Route::get('/jawaban-download/{id}', [TugasController::class, 'downloadJawaban'])->name('guru.jawaban.download');
 });
+
 Route::group(['middleware' => ['auth', 'checkRole:siswa']], function () {
     Route::get('/siswa/dashboard', [HomeController::class, 'siswa'])->name('siswa.dashboard');
     Route::get('/siswa/materi', [MateriController::class, 'siswa'])->name('siswa.materi');
@@ -62,4 +75,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::resource('siswa', SiswaController::class);
     Route::resource('user', UserController::class);
     Route::resource('jadwal', JadwalController::class);
+    // Route::resource('absensi', AbsensiController::class);
+    // Route::resource('meeting', MeetingController::class);
+    // Route::resource('presensi', PresensiMeetingController::class);
 });

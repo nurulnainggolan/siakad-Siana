@@ -13,18 +13,20 @@ class ResetPasswordController extends Controller
     | Password Reset Controller
     |--------------------------------------------------------------------------
     |
-    | This controller is responsible for handling password reset requests
-    | and uses a simple trait to include this behavior. You're free to
-    | explore this trait and override any methods you wish to tweak.
+    | Kontroler ini bertanggung jawab untuk menangani permintaan reset password
+    | dan menggunakan trait sederhana untuk menyertakan perilaku ini. Anda bebas
+    | untuk menjelajahi trait ini dan menimpa metode apapun yang ingin Anda sesuaikan.
     |
     */
 
+    /*Menggunakan trait ResetsPasswords untuk mengakses metode reset password*/
     use ResetsPasswords;
 
     /**
-     * Where to redirect users after resetting their password.
-     *
+     * Dimana untuk mengalihkan pengguna setelah mereset password mereka.
      * @var string
      */
+
+    /*Menentukan rute tujuan setelah pengguna berhasil reset ulang password */
     protected $redirectTo = RouteServiceProvider::HOME;
 }

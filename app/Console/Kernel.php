@@ -8,8 +8,9 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     /**
-     * Define the application's command schedule.
+     * Mendefenisikan jadwal perintah program
      *
+     * Digunakan untuk menjadwalkan perintah artisan atau tugas lain yang perlu dijalankan secara berkala
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
@@ -19,14 +20,19 @@ class Kernel extends ConsoleKernel
     }
 
     /**
-     * Register the commands for the application.
+     * Mendaftarkan perintah untuk program.
      *
+     * Digunakan untuk mendaftarkan semua perintah artisan kustom yang dibuat
      * @return void
      */
     protected function commands()
     {
+        /*Ini akan mendaftarkan perintah-perintah kustom yang ada di folder app/Console/Commands*/
         $this->load(__DIR__.'/Commands');
 
+         // Perintah tambahan ini bisa didefinisikan di file routes/console.php*/
         require base_path('routes/console.php');
     }
 }
+
+/**file ini berguna untuk mengatur jadwal dan perintah console yang akan dijalankan secara otomatis */

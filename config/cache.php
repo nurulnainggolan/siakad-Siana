@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Str;
 
+/***
+ * Mengatur sistem chache dalam aplikasi laravel
+ */
 return [
 
     /*
@@ -15,6 +18,7 @@ return [
     |
     */
 
+    /*Menentukan driver cache yang digunakan*/
     'default' => env('CACHE_DRIVER', 'file'),
 
     /*
@@ -33,27 +37,52 @@ return [
 
     'stores' => [
 
+        /*Menentukan driver untuk chace APC ( alternative PHP cache ) 
+        *APC digunakan untuk meningkatkan performa aplikasi.
+        *Fungsi untuk menyimpan proses yang berulang agar kinerja web baik
+        *contoh : data absensi, pertemuan dll
+        */
         'apc' => [
             'driver' => 'apc',
         ],
 
+        /*Menetukan driver untuk chace Array */
+        /**
+         * Penyimpanan data dalam siklus permintaan (cth : permintaan membuka dashboard)
+         */
         'array' => [
             'driver' => 'array',
-            'serialize' => false,
+            'serialize' => false, //menentukan apakah data harus di serialize atau tidak
         ],
 
+        /*Menetukan driver untuk chace Database*/
+        /***
+         * untuk menjaga penyimpanan data, meskipun server mati
+         * data chace tetap ada walaupun website di restart
+         */
         'database' => [
             'driver' => 'database',
-            'table' => 'cache',
+            'table' => 'cache', 
             'connection' => null,
             'lock_connection' => null,
         ],
 
+        /*Menetukan driver untuk chace file */
+        /**
+         * File akan disimpan di drive lokal server
+         * 
+         */
         'file' => [
             'driver' => 'file',
             'path' => storage_path('framework/cache/data'),
         ],
 
+        /*memchaced merupakan chacing berbasis memori yang digunkan untuk meningkatkan performa web */
+        /**
+         * Digunakan agar performa web baik walaupun banyak yang akses, dan web selalu sering membutuhkan data yang sama seperti pertemuan, materi
+         * 
+         * 
+         */
         'memcached' => [
             'driver' => 'memcached',
             'persistent_id' => env('MEMCACHED_PERSISTENT_ID'),
@@ -73,12 +102,19 @@ return [
             ],
         ],
 
+        /*Konesksi yang digunakan untuk redis */
+        /**
+         * Menyimpan data atau status yang dapat berkaitan meskipun sistem dimatikan
+         * 
+         * 
+         */ 
         'redis' => [
             'driver' => 'redis',
             'connection' => 'cache',
             'lock_connection' => 'default',
         ],
 
+        /*Koneksi untuk dynamodb , karena web merupakan skala besar dan membutuhkan chache yang andal dan terdistribusi*/
         'dynamodb' => [
             'driver' => 'dynamodb',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -88,6 +124,7 @@ return [
             'endpoint' => env('DYNAMODB_ENDPOINT'),
         ],
 
+        /*agar dapat menggunakan cache di laravel */
         'octane' => [
             'driver' => 'octane',
         ],
@@ -105,6 +142,7 @@ return [
     |
     */
 
+    /*Menentukan prefix,  mencegah konflik kunci cache jika beberapa aplikasi menggunakan driver cache yang sama */
     'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_cache'),
 
 ];

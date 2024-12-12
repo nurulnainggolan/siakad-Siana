@@ -13,6 +13,7 @@ return [
     |
     */
 
+    /*Mengatur bagaimana user diotentikasi dan bagaimana pengelolaan password */
     'defaults' => [
         'guard' => 'web',
         'passwords' => 'users',
@@ -35,6 +36,7 @@ return [
     |
     */
 
+    /*Mengelola sesi user dan melakukan otentikasi untuk menjaga keamanan */
     'guards' => [
         'web' => [
             'driver' => 'session',
@@ -85,6 +87,7 @@ return [
     | they have less time to be guessed. You may change this as needed.
     |
     */
+    /*Penganturan reset kata sandi dan menjadi keamanan web  */
 
     'passwords' => [
         'users' => [
@@ -106,6 +109,7 @@ return [
     |
     */
 
+    /*Mengatur waktu untuk mengkonfirmasi kata sandi dan menjadi keamanan web => 3 jam */
     'password_timeout' => 10800,
 
 ];

@@ -13,7 +13,11 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Sisfo Sekolah'),
+
+
+    /*untuk mengubah nama*/
+    'name' => env('SiAna', 'SiAna'),
+    'company_name' => env('APP_COMPANY_NAME', 'Default Company'),
 
     /*
     |--------------------------------------------------------------------------

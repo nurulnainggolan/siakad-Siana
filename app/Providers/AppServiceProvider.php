@@ -4,23 +4,29 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+/***
+ * Bagian laravel yang berfungsi untuk penyedia layanan 
+ * Service Provider ( tempat penyediaan layanan )
+ */
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Mendaftarkan layanan aplikasi.
      *
      * @return void
      */
+    /*Mendaftarkan layanan ke container */
     public function register()
     {
         //
     }
 
     /**
-     * Bootstrap any application services.
+     * Melakukan bootstrap pada layanan boostrap.
      *
      * @return void
      */
+   
     public function boot()
     {
         //

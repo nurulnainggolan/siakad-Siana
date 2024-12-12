@@ -13,18 +13,20 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan detail pengguna yang terdaftar
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+
+        /*Mengambil semua pengguna dan mengurutkan berdasarkan peran  */
         $user = User::OrderBy('roles', 'asc')->get();
         return view('pages.admin.user.index', compact('user'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Menampilkan form untuk membuat user baru.
      *
      * @return \Illuminate\Http\Response
      */
@@ -34,13 +36,14 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Menyimpan user baru ke dalam database.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        /*validasi input dari pengguna */
         $this->validate($request, [
             'email' => 'required|email|unique:users',
             'password' => 'required',
@@ -49,23 +52,28 @@ class UserController extends Controller
             'email.unique' => 'Email sudah terdaftar',
         ]);
 
+        /*Jika peran adalah guru */
         if ($request->roles == 'guru') {
+            /*Menghitung jumlah guru dengan NIP  yang diberikan  */
             $countGuru = Guru::where('nip', $request->nip)->count();
+            /*Mengambil data guru berdasarkan NIP */
             $guruId = Guru::where('nip', $request->nip)->get();
             foreach ($guruId as $val) {
                 $guru = Guru::findOrFail($val->id);
             }
 
+            /*Jika NIP terdaftar sebagai guru */
             if ($countGuru >= 1) {
+                /*Membuat pengguna baru dengan data yang diberikan  */
                 User::create([
                     'name' => $guru->nama,
                     'email' => $request->email,
-                    'password' => Hash::make($request->password),
+                    'password' => Hash::make($request->password), //memberikan password sebelum disimpan
                     'roles' => $request->roles,
                     'nip' => $request->nip
                 ]);
 
-                // Add user id to guru table
+                // Menambahkan user id ke tabel guru
                 $guru->user_id = User::where('email', $request->email)->first()->id;
                 $guru->save();
 
@@ -75,13 +83,17 @@ class UserController extends Controller
                 return redirect()->route('user.index')->with('error', 'NIP tidak terdaftar sebagai guru');
             }
         } elseif ($request->roles == "siswa") {
+            /*Menghitung jumlah siswa dengan NIS yang diberikan */
             $countSiswa = Siswa::where('nis', $request->nis)->count();
+            /*Mengambil data siswa berdasarkan NIS */
             $siswaId = Siswa::where('nis', $request->nis)->get();
             foreach ($siswaId as $val) {
                 $siswa = Siswa::findOrFail($val->id);
             }
 
+            /*Jika NIS terdaftar sebagai siswa */
             if ($countSiswa >= 1) {
+                /*Membuat pengguna baru dengan data yang diberikan  */
                 User::create([
                     'name' => $siswa->nama,
                     'email' => $request->email,
@@ -90,14 +102,15 @@ class UserController extends Controller
                     'nis' => $request->nis
                 ]);
 
-                // Add user id to siswa table
+                /*Menambahka user_id ke tabel siswa untuk mengaitkan pengguna dengan siswa */
                 $siswa->user_id = User::where('email', $request->email)->first()->id;
                 $siswa->save();
-
                 return redirect()->route('user.index')->with('success', 'Data user berhasil ditambahkan');
+                /*Jika NIS tidak terdaftar sebagai siswa, maka akan menampilkan pesan error */
             } else {
                 return redirect()->route('user.index')->with('error', 'NIS tidak terdaftar sebagai siswa');
             }
+        /*Membuat user baru dengan data yang diberikan */
         } else {
             User::create([
                 'name' => $request->name,
@@ -110,7 +123,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Menampilkan form yang ditentukan.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -121,13 +134,14 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Menampilkan form untuk mengedit user yang ditentukan.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit()
     {
+        /*Mengambil data guru, siswa, dan admin berdasarkan user yang sedang logi  */
         $guru = Guru::where('user_id', Auth::user()->id)->first();
         $siswa = Siswa::where('user_id', Auth::user()->id)->first();
         $admin = User::findOrFail(Auth::user()->id);
@@ -136,7 +150,7 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Memperbarui form user yang ditentukan dalam penyimpanan.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -144,11 +158,11 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
+        /*Memeriksa peran pengguna yang sedang login */
         if (Auth::user()->roles == 'guru') {
-
             $data = $request->all();
 
-            // Save to guru table
+            /*Menyimpan data ke tabel guru */
             $guru = Guru::where('user_id', Auth::user()->id)->first();
             $guru->nama = $data['nama'];
             $guru->nip = $data['nip'];
@@ -156,7 +170,7 @@ class UserController extends Controller
             $guru->no_telp = $data['no_telp'];
             $guru->update($data);
 
-            // Save to user table
+            // Menyimpan data ke tabel user
             $user = Auth::user();
             $user->name = $data['nama'];
             $user->email = $data['email'];
@@ -165,7 +179,7 @@ class UserController extends Controller
 
             $data = $request->all();
 
-            // Save to siswa table
+            // Menyimpan data ke tabel siswa
             $siswa = Siswa::where('user_id', Auth::user()->id)->first();
             $siswa->nama = $data['nama'];
             $siswa->nis = $data['nis'];
@@ -173,7 +187,7 @@ class UserController extends Controller
             $siswa->telp = $data['telp'];
             $siswa->update($data);
 
-            // Save to user table
+            // Menyimpan data ke tabel user
             $user = Auth::user();
             $user->name = $data['nama'];
             $user->email = $data['email'];
@@ -181,7 +195,7 @@ class UserController extends Controller
         } else {
             $data = $request->all();
 
-            // Save to user table
+            // Menyimpan data ke tabel user
             $user = Auth::user();
             $user->name = $data['name'];
             $user->email = $data['email'];
@@ -192,19 +206,22 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Menghapus user yang ditentukan dari database.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
+        /*Menghapus user berdasarkan ID yang diberikan */
         User::destroy($id);
         return redirect()->route('user.index')->with('success', 'Data user berhasil dihapus');
     }
 
+    /*Menampilkan form untuk mengedit password */
     public function editPassword()
     {
+        /*Mengambil data guru, siswa, dan admin berdasarkan user yang sedang login */
         $guru = Guru::where('user_id', Auth::user()->id)->first();
         $siswa = Siswa::where('user_id', Auth::user()->id)->first();
         $admin = User::findOrFail(Auth::user()->id);
@@ -215,16 +232,20 @@ class UserController extends Controller
     public function updatePassword(Request $request)
     {
 
+        /*Mengambil semua data dari request untuk diubah */
         // dd($request->all());
 
+        /*Memeriksa apakah password saat ini yang dimasukkan pengguna cocok dengan password yang tersimpan di database */
         if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
             return redirect()->back()->with("error", "Password lama tidak sesuai");
         }
 
+        /*Memeriksa apakah password baru yang dimasukkan pengguna cocok dengan konfirmasi password */
         if (strcmp($request->get('current-password'), $request->get('new-password')) == 0) {
             return redirect()->back()->with("error", "Password baru tidak boleh sama dengan password lama");
         }
 
+        /*Melakukan validasi pada input dari request */
         $this->validate($request, [
             'current-password' => 'required',
             'new-password' => 'required|string|min:6',
@@ -232,7 +253,7 @@ class UserController extends Controller
             'new-password.min' => 'Password baru minimal 6 karakter',
         ]);
 
-        // Change Password
+        /*Mengubah Password */
         $user = Auth::user();
         $user->password = bcrypt($request->get('new-password'));
         $user->save();

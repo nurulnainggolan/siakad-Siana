@@ -9,11 +9,18 @@ class Siswa extends Model
 {
     use HasFactory;
 
+    /*Menentukan tabel yang dapat diisi dengan massal */
     protected $fillable = ['nis', 'nama', 'kelas_id', 'telp', 'alamat', 'foto'];
 
+    /*relasi dengan model kelas */
     public function kelas()
     {
         return $this->belongsTo(Kelas::class, 'kelas_id');
     }
 
+    /*relasi dengan model presensi */
+    public function presensi()
+    {
+        return $this->hasMany(PresensiMeeting::class, 'siswa_id', 'id');
+    }
 }

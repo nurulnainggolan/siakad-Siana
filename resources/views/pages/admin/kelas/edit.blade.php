@@ -10,9 +10,9 @@
                         <div class="alert alert-danger alert-dismissible show fade">
                             <div class="alert-body">
                                 <button class="close" data-dismiss="alert">
-                                <span>&times;</span>
+                                    <span>&times;</span>
                                 </button>
-                                @foreach ($errors->all() as $error )
+                                @foreach ($errors->all() as $error)
                                     {{ $error }}
                                 @endforeach
                             </div>
@@ -29,23 +29,39 @@
                                 @method('PUT')
                                 <div class="form-group">
                                     <label for="nama_kelas">Nama Kelas</label>
-                                    <input type="text" id="nama_kelas" name="nama_kelas" class="form-control @error('nama_kelas') is-invalid @enderror" placeholder="{{ __('Nama Mata Pelajaran') }}" value="{{ $kelas->nama_kelas }}">
+                                    <input type="text" id="nama_kelas" name="nama_kelas"
+                                        class="form-control @error('nama_kelas') is-invalid @enderror"
+                                        placeholder="{{ __('Nama Mata Pelajaran') }}" value="{{ $kelas->nama_kelas }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="guru_id">Wali Kelas</label>
-                                    <select id="guru_id" name="guru_id" class="select2bs4 form-control @error('guru_id') is-invalid @enderror">
+                                    <select id="guru_id" name="guru_id"
+                                        class="select2bs4 form-control @error('guru_id') is-invalid @enderror">
                                         <option value="">-- Pilih Wali Kelas --</option>
-                                        @foreach ($guru as $data )
+                                        @foreach ($guru as $data)
                                             <option value="{{ $data->id }}"
-                                            @if ($kelas->guru_id == $data->id)
-                                                selected
-                                            @endif
-                                        >{{ $data->nama }}</option>
+                                                @if ($kelas->guru_id == $data->id) selected @endif>{{ $data->nama }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="jurusan_id">Jurusan</label>
+                                    <select id="jurusan_id" name="jurusan_id"
+                                        class="select2bs4 form-control @error('jurusan_id') is-invalid @enderror">
+                                        <option value="">-- Pilih Jurusan --</option>
+                                        @foreach ($jurusan as $data)
+                                            <option value="{{ $data->id }}"
+                                                @if ($kelas->jurusan_id == $data->id) selected @endif>{{ $data->nama_jurusan }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary"><i class="nav-icon fas fa-save"></i> &nbsp; Simpan Perubahan</button>
+                                    <button type="submit" class="btn btn-primary"><i class="nav-icon fas fa-save"></i>
+                                        &nbsp; Simpan Perubahan</button>
                                 </div>
                             </form>
                         </div>

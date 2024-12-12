@@ -21,7 +21,9 @@ class CreateTugasTable extends Migration
             $table->string('deskripsi')->nullable();
             $table->string('file')->nullable();
             $table->timestamps();
-
+            $table->integer('nilai')->nullable(); // Menambahkan kolom nilai untuk setiap tugas
+            $table->integer('kkm')->default(70);  // Menambahkan kolom KKM, default 70
+            $table->timestamps();
             // Relation Tables
             $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');
             $table->foreign('guru_id')->references('id')->on('gurus')->onDelete('cascade');

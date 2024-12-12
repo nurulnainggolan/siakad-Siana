@@ -10,36 +10,40 @@ use Illuminate\Support\Facades\Crypt;
 class MapelController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan daftar semua resource(mapel)
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+        /*Mengambil data jurusan dan mapel dari database, diurutkan berdasarkan nama jurusan*/
         $jurusan = Jurusan::OrderBy('nama_jurusan', 'asc')->get();
         $mapel = Mapel::OrderBy('nama_mapel', 'asc')->get();
 
+        /*Mengarahkan kembali ke halaman sebelumnya*/
         return view('pages.admin.mapel.index', compact('mapel', 'jurusan'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     *  Menampilkan form untuk membuat resource baru..
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
+        /*Jika tidak diimplementasikan */
         abort(404);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Menyimpan resource baru ke dalam penyimpanan.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        /*Validasi data yang diterima dari request */
         $this->validate($request, [
             'nama_mapel' => 'required|unique:mapels',
             'jurusan_id' => 'required'
@@ -47,6 +51,7 @@ class MapelController extends Controller
             'nama_mapel.unique' => 'Nama Mapel sudah ada',
         ]);
 
+        /*Memperbarui data mapel ke dalam database */
         Mapel::updateOrCreate(
             [
                 'id' => $request->mapel_id
@@ -57,11 +62,12 @@ class MapelController extends Controller
             ]
         );
 
+        /*Mengarahkan kembali ke halaman sebelumnya */
         return back()->with('success', 'Data mapel berhasil diperbarui!');
     }
 
     /**
-     * Display the specified resource.
+     * Menampilkan  mapel yang ditentukan.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -72,21 +78,23 @@ class MapelController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Menampilkan form untuk mengedit resource yang ditentukan.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
+        /*Mendeskripsikan ID dan mencari mapel berdasarkan ID */
         $id = Crypt::decrypt($id);
         $mapel = Mapel::findOrFail($id);
 
+         /*Mengarahkan kembali ke halaman sebelumnya */
         return view('pages.admin.mapel.edit', compact('mapel'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Memperbarui mapel dalam penyimpanan
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -94,22 +102,31 @@ class MapelController extends Controller
      */
     public function update(Request $request, $id)
     {
+        /*Mengambil semua data dari request */
         $data = $request->all();
+
+        /*Mencari mapel berdasarkan ID */
         $mapel = Mapel::findOrFail($id);
+
+        /*Memperui data mapel dengan data baru */
         $mapel->update($data);
 
+         /*Mengarahkan kembali ke halaman sebelumnya */
         return redirect()->route('mapel.index')->with('success', 'Data mapel berhasil diperbarui!');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Menghapus mapel dari penyimpanan
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
+        /*Mencari dan menghapus mapel berdasarkan ID */
         Mapel::find($id)->delete();
+
+         /*Mengarahkan kembali ke halaman sebelumnya */
         return back()->with('success', 'Data mapel berhasil dihapus!');
     }
 }

@@ -11,6 +11,8 @@
                         <h4>List Materi</h4>
                         <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="nav-icon fas fa-folder-plus"></i>&nbsp; Tambah Materi</button>
                     </div>
+                        
+                    </div>
                     <div class="card-body">
                         @if ($message = Session::get('success'))
                         <div class="alert alert-success alert-dismissible show fade">
