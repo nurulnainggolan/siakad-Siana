@@ -1,12 +1,4 @@
 
-# Sistem Informasi Sekolah
-
-Sistem informasi sekolah berbasis laravel 8 dengan template dashboard
-[Stisla](https://getstisla.com/)
-## Authors
-
-- [Pascal Adnan](https://www.github.com/lacsapadnan)
-
 
 ## Fitur
 
@@ -20,11 +12,6 @@ Sistem informasi sekolah berbasis laravel 8 dengan template dashboard
 - CRUD Jadwal Sekolah
 
 
-## Screenshots
-
-![Login](https://i.ibb.co/QrvFVsq/download.png)
-
-![Dashboard](https://i.ibb.co/4Vvff5F/Screenshot-3.jpg)
 
 
 ## Instalasi
@@ -57,41 +44,4 @@ Jalankan website
 ```bash
   php artisan serve
 ```
-## Default akun untuk testing
-
-Admin
-```bash
-  email : admin@mail.com
-  password : admin123
-```
-
-Guru
-```bash
-  email : budi@mail.com
-  password : budi123
-
-  email : gunawan@mail.com
-  password : gunawan123
-```
-
-Siswa
-```bash
-  email : kevin@mail.com
-  password : kevin123
-
-  email : siska@mail.com
-  password : siska123
-```
-## Update Selanjutnya
-
-(Free Version)
-- Fitur Pengumuman Sekolah
-
-(Premium Version)
-- Premium Template Metronic
-- Fitur Absensi
-- Fitur Kuis atau Ujian
-- Fitur Tabungan Siswa
-- Fitur Pembayaran Sekolah
-- Payment Gateway (Midtrans, Xendit, Tripay, dll)
 
