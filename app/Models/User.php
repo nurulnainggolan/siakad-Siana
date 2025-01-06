@@ -25,7 +25,8 @@ class User extends Authenticatable
         'password',
         'roles',
         'nis',
-        'nip'
+        'nip',
+        'kelas_id',
     ];
 
     /**
@@ -57,7 +58,8 @@ class User extends Authenticatable
 
     /*Mendapatkan data siswa berdasarkan NIS */
     public function siswa($id) {
-        $siswa = Siswa::where('nis', $id)->first();
-        return $siswa;
+        /*$siswa = Siswa::where('nis', $id)->first();
+        return $siswa;*/
+         return $this->hasOne(Siswa::class, 'user_id', 'id');
     }
 }

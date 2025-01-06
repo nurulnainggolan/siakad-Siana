@@ -18,8 +18,8 @@ class JadwalController extends Controller
     {
             
         
-        /*Mengambil semua jadwal dan mengurutkannya berdasarkan hari secara menurun 
-        $jadwal = Jadwal::orderBy('hari', 'desc')->get();*/
+        /*Mengambil semua jadwal dan mengurutkannya berdasarkan hari secara menurun */
+        $jadwal = Jadwal::orderBy('hari', 'desc')->get();
 
         /*Mengambil semua mata pelajaran dan mengurutkannya berdasarkan nama secara menurun */
         $mapel = Mapel::orderBy('nama_mapel', 'desc')->get();

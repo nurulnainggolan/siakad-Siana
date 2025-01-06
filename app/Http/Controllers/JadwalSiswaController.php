@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Jadwal;
 use App\Models\Kelas;
 use App\Models\Mapel;
@@ -15,20 +16,25 @@ class JadwalSiswaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        /*Mengambil semua jadwal dan mengurutkannya berdasarkan hari secara menurun */
-        $jadwal = Jadwal::orderBy('hari', 'desc')->get();
+{
+    // Mengambil ID kelas yang terautentikasi
+    $kelasID = Auth::user()->kelas_id;
+   
 
-        /*Mengambil semua mata pelajaran dan mengurutkannya berdasarkan nama secara menurun */
-        $mapel = Mapel::orderBy('nama_mapel', 'desc')->get();
+    // Mengambil semua jadwal yang sesuai dengan kelas_id dan mengurutkannya berdasarkan hari secara menurun
+    $jadwal = Jadwal::where('kelas_id', $kelasID)
+                    ->orderBy('hari', 'desc')
+                    ->get();
 
-        /*Mengambil semua kelas dan mengurutkannya berdasarkan nama secara menurun */
-        $kelas = Kelas::orderBy('nama_kelas', 'desc')->get();
+    // Mengambil semua mata pelajaran dan mengurutkannya berdasarkan nama secara menurun
+    $mapel = Mapel::orderBy('nama_mapel', 'desc')->get();
 
-        /*Mengembalikan view dengan data jadwal, mata pelajaran, dan kelas */
-        return view('pages.siswa.jadwal.index', compact('jadwal', 'mapel', 'kelas'));
-    }
+    // Mengambil semua kelas dan mengurutkannya berdasarkan nama secara menurun
+    $kelas = Kelas::orderBy('nama_kelas', 'desc')->get();
 
+    // Mengembalikan view dengan data jadwal, mata pelajaran, dan kelas
+    return view('pages.siswa.jadwal.index', compact('jadwal', 'mapel', 'kelas'));
+}
     /**
      * Menampilkan formulir untuk membuat resource
      *
@@ -71,21 +77,20 @@ class JadwalSiswaController extends Controller
             'sampai_jam.required' => 'Jam selesai wajib diisi',
         ]);
 
-        /*Membuat jadwal baru */
+        /*Membuat jadwal baru 
         Jadwal::create([
             'kelas_id' => $data['kelas_id'],
             'mapel_id' => $data['mapel_id'],
             'hari' => $data['hari'],
             'dari_jam' => $data['dari_jam'],
             'sampai_jam' => $data['sampai_jam'],
-        ]);
+        ]);*/
 
-        /*Mengalihkan kembali dengan pesan sukses */
-        return redirect()->back()->with('success', 'Jadwal berhasil dibuat');
+        /*Mengalihkan kembali dengan pesan sukses 
+        return redirect()->back()->with('success', 'Jadwal berhasil dibuat');*/
     }
 
-    /**
-     * Menampilkan jadwal
+    /** * Menampilkan jadwal
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

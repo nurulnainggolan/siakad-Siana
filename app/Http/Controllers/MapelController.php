@@ -16,6 +16,7 @@ class MapelController extends Controller
      */
     public function index()
     {
+        $guruId = auth()->user()->id;
         /*Mengambil data jurusan dan mapel dari database, diurutkan berdasarkan nama jurusan*/
         $jurusan = Jurusan::OrderBy('nama_jurusan', 'asc')->get();
         $mapel = Mapel::OrderBy('nama_mapel', 'asc')->get();

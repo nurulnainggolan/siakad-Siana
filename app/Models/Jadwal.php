@@ -21,7 +21,7 @@ class Jadwal extends Model
         return $this->belongsTo(Mapel::class, 'mapel_id', 'id');
     }
 
-    /*Relasi kelasa */
+    /*Relasi kelas */
     public function kelas()
     {
         return $this->belongsTo(Kelas::class, 'kelas_id', 'id');

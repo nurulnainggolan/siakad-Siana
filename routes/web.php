@@ -72,7 +72,7 @@ Route::group(['middleware' => ['auth', 'checkRole:siswa']], function () {
     Route::get('/siswa/tugas', [TugasController::class, 'siswa'])->name('siswa.tugas');
     Route::get('/tugas-download/{id}', [TugasController::class, 'download'])->name('siswa.tugas.download');
     Route::post('/kirim-jawaban', [TugasController::class, 'kirimJawaban'])->name('kirim-jawaban');
-    
+    Route::get('/jadwal', [JadwalController::class, 'index'])->middleware('auth');
     // Update pada resource route 'jadwal'
 
        
