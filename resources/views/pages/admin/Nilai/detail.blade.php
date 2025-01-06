@@ -59,6 +59,8 @@
                                             <th>Harian</th>
                                             <th>UTS</th>
                                             <th>UAS</th>
+                                            <th>Nilai Akhir</th>
+                                            <th>Keterangan</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -78,6 +80,20 @@
                                                 <td>{{ $nilaiSiswa ? $nilaiSiswa->harian : '-' }}</td>
                                                 <td>{{ $nilaiSiswa ? $nilaiSiswa->uts : '-' }}</td>
                                                 <td>{{ $nilaiSiswa ? $nilaiSiswa->uas : '-' }}</td>
+                                                <td>
+                                                    @if ($nilaiSiswa)
+                                                        {{ round(($nilaiSiswa->harian * 0.2) + ($nilaiSiswa->uts * 0.3) + ($nilaiSiswa->uas * 0.5), 2) }}
+                                                    @else
+                                                        -
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if (isset($nilaiSiswa) && (round(($nilaiSiswa->harian * 0.2) + ($nilaiSiswa->uts * 0.3) + ($nilaiSiswa->uas * 0.5), 2) < 70))
+                                                        <span class="badge badge-danger">Tidak Tuntas</span>
+                                                    @else
+                                                        <span class="badge badge-success">Tuntas</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <div class="d-flex">
                                                         @canany(['admin', 'guru'])

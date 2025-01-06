@@ -30,9 +30,5 @@ class Nilai extends Model
         return $this->belongsTo(Siswa::class);
     }
 
-    /* Relasi model nilai dan tugas */
-    public function tugas()
-    {
-        return $this->belongsTo(Tugas::class);
-    }
+    
 }

@@ -8,34 +8,33 @@ use Illuminate\Http\Request;
 class NilaiSiswaController extends Controller
 {
     /**
-     * Menampilkan daftar semua nilai.
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //Fungsi menampilkan daftar nilai siswa
+        //
     }
 
     /**
-     * Menampilkan form untuk membuat nilai baru
+     * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //Fungsi untuk menampilkan form membuat nilai baru
+        //
     }
 
     /**
-     * Menyimpan nilai yang baru ke dalam database
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        /*Validasi data yang dikirimkan melalui form */
         $this->validate($request, [
             'siswaId' => 'required',
             'harian' => 'required',
@@ -43,13 +42,11 @@ class NilaiSiswaController extends Controller
             'uas' => 'required'
         ]);
 
-        /*Mengambil nilai dari form*/
         $nilaiId = $request->nilai_id;
 
         // cek apakaha siswa sudah ada nilai
         $cek = NilaiSiswa::where('siswa_id', $request->siswaId)->where('nilai_id', $nilaiId)->first();
         if ($cek) {
-            /*Jika sudah ada, update nilai yang ada */
             $cek->update([
                 'harian' => $request->harian,
                 'uts' => $request->uts,
@@ -57,7 +54,6 @@ class NilaiSiswaController extends Controller
             ]);
             return redirect()->route('nilai.show', encrypt($nilaiId))->with('success', 'Data berhasil disimpan');
         } else {
-            /*Jika tidak ada, maka buat nilai baru */
             NilaiSiswa::create([
                 'nilai_id' => $nilaiId,
                 'siswa_id' => $request->siswaId,
@@ -70,29 +66,29 @@ class NilaiSiswaController extends Controller
     }
 
     /**
-     * Menampilkan nilai yang ditentukan.
+     * Display the specified resource.
      *
      * @param  \App\Models\NilaiSiswa  $nilaiSiswa
      * @return \Illuminate\Http\Response
      */
     public function show(NilaiSiswa $nilaiSiswa)
     {
-        //Fungsi untuk menampilkan detail nilai siswa yang akan ditambahkan
+        //
     }
 
     /**
-     * Menampilkan form untuk mengedit nilai siswa.
+     * Show the form for editing the specified resource.
      *
      * @param  \App\Models\NilaiSiswa  $nilaiSiswa
      * @return \Illuminate\Http\Response
      */
     public function edit(NilaiSiswa $nilaiSiswa)
     {
-        //Fungsi untuk menampilkan form edit nilai siswa
+        //
     }
 
     /**
-     * Memperbarui nilai siswa.
+     * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\NilaiSiswa  $nilaiSiswa
@@ -100,17 +96,17 @@ class NilaiSiswaController extends Controller
      */
     public function update(Request $request, NilaiSiswa $nilaiSiswa)
     {
-        //Fungsi untuk memperbarui nilai siswa
+        //
     }
 
     /**
-     * Menghapus nilai siswa.
+     * Remove the specified resource from storage.
      *
      * @param  \App\Models\NilaiSiswa  $nilaiSiswa
      * @return \Illuminate\Http\Response
      */
     public function destroy(NilaiSiswa $nilaiSiswa)
     {
-        //Fungsi untuk menghapus nilai siswa
+        //
     }
 }

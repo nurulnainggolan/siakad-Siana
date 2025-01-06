@@ -7,7 +7,7 @@ use App\Models\Kelas;
 use App\Models\Mapel;
 use Illuminate\Http\Request;
 
-class JadwalController extends Controller
+class JadwalSiswaController extends Controller
 {
     /**
      * Menampilkan resource
@@ -16,10 +16,8 @@ class JadwalController extends Controller
      */
     public function index()
     {
-            
-        
-        /*Mengambil semua jadwal dan mengurutkannya berdasarkan hari secara menurun 
-        $jadwal = Jadwal::orderBy('hari', 'desc')->get();*/
+        /*Mengambil semua jadwal dan mengurutkannya berdasarkan hari secara menurun */
+        $jadwal = Jadwal::orderBy('hari', 'desc')->get();
 
         /*Mengambil semua mata pelajaran dan mengurutkannya berdasarkan nama secara menurun */
         $mapel = Mapel::orderBy('nama_mapel', 'desc')->get();
@@ -28,7 +26,7 @@ class JadwalController extends Controller
         $kelas = Kelas::orderBy('nama_kelas', 'desc')->get();
 
         /*Mengembalikan view dengan data jadwal, mata pelajaran, dan kelas */
-        return view('pages.admin.jadwal.index', compact('jadwal', 'mapel', 'kelas'));
+        return view('pages.siswa.jadwal.index', compact('jadwal', 'mapel', 'kelas'));
     }
 
     /**

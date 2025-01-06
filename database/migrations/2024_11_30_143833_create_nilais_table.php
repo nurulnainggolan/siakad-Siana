@@ -17,10 +17,6 @@ class CreateNilaisTable extends Migration
             $table->id();
             $table->foreignId('kelas_id')->constrained()->onDelete('cascade');
             $table->foreignId('guru_id')->constrained()->onDelete('cascade');
-            $table->foreignId('siswa_id')->constrained()->onDelete('cascade');
-            $table->foreignId('tugas_id')->constrained()->onDelete('cascade');
-            $table->integer('nilai'); // Kolom untuk menyimpan nilai siswa
-            $table->integer('kkm')->default(70); // Kolom untuk menyimpan KKM, default 70
             $table->timestamps();
         });
     }

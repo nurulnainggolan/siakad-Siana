@@ -15,6 +15,8 @@ use App\Http\Controllers\PresensiMeetingController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\JadwalSiswaController;
+use App\Http\Controllers\JadwalGuruController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -29,14 +31,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/test', function () {
+    return 'Nuruk';
+});
+
+
 Route::get('/', function () {
     return view('welcome');
-})->middleware('auth');
+});
 
+// Tetap biarkan ini untuk routing autentikasi
 Auth::routes();
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/profile', [UserController::class, 'edit'])->name('profile');
     Route::put('/update-profile', [UserController::class, 'update'])->name('update.profile');
@@ -47,8 +56,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('presensi', PresensiMeetingController::class);
     Route::resource('/nilai', NilaiController::class);
     Route::resource('/nilaiSiswa', NilaiSiswaController::class);
-    Route::get('/nilai', [NilaiController::class, 'index'])->name('nilai.index');
-    Route::post('/nilai', [NilaiController::class, 'store'])->name('nilai.store');
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:guru']], function () {
@@ -65,7 +72,22 @@ Route::group(['middleware' => ['auth', 'checkRole:siswa']], function () {
     Route::get('/siswa/tugas', [TugasController::class, 'siswa'])->name('siswa.tugas');
     Route::get('/tugas-download/{id}', [TugasController::class, 'download'])->name('siswa.tugas.download');
     Route::post('/kirim-jawaban', [TugasController::class, 'kirimJawaban'])->name('kirim-jawaban');
+    
+    // Update pada resource route 'jadwal'
+
+       
 });
+
+Route::group(['middleware' => ['auth', 'checkRole:siswa']], function () {
+    Route::resource('siswa/jadwalian', JadwalSiswaController::class);
+});
+
+Route::group(['middleware' => ['auth', 'checkRole:guru']], function () {
+    Route::resource('guru/jadwallian', JadwalGuruController::class);
+});
+
+
+
 Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::get('/admin/dashboard', [HomeController::class, 'admin'])->name('admin.dashboard');
     Route::resource('jurusan', JurusanController::class);
@@ -75,7 +97,4 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::resource('siswa', SiswaController::class);
     Route::resource('user', UserController::class);
     Route::resource('jadwal', JadwalController::class);
-    // Route::resource('absensi', AbsensiController::class);
-    // Route::resource('meeting', MeetingController::class);
-    // Route::resource('presensi', PresensiMeetingController::class);
 });

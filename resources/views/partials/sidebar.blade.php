@@ -44,6 +44,13 @@
                         href="{{ route('guru.dashboard') }}"><i class="fas fa-columns"></i> <span>Dashboard</span></a>
                 </li>
                 <li class="menu-header">Master Data</li>
+
+                <li class="{{ request()->is('guru/jadwallian') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ url('guru/jadwallian') }}">
+                            <i class="fas fa-calendar"></i> 
+                            <span>Jadwal</span>
+                        </a>
+                    </li>
                 <li class="{{ request()->routeIs('materi.*') ? 'active' : '' }}"><a class="nav-link"
                         href="{{ route('materi.index') }}"><i class="fas fa-book"></i> <span>Materi</span></a></li>
                 <li class="{{ request()->routeIs('absensi.*') ? 'active' : '' }}"><a class="nav-link"
@@ -56,6 +63,14 @@
                 <li class="{{ request()->routeIs('siswa.dashboard.*') ? 'active' : '' }}"><a class="nav-link"
                         href="{{ route('siswa.dashboard') }}"><i class="fas fa-columns"></i> <span>Dashboard</span></a>
                 </li>
+<li class="{{ request()->is('siswa/jadwalian') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ url('siswa/jadwalian') }}">
+        <i class="fas fa-calendar"></i> 
+        <span>Jadwal</span>
+    </a>
+</li>
+
+                    
 
                 <li class="{{ request()->routeIs('materi.*') ? 'active' : '' }}"><a class="nav-link"
                         href="{{ route('siswa.materi') }}"><i class="fas fa-book"></i> <span>Materi</span></a></li>

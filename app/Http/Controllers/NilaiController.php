@@ -24,6 +24,7 @@ class NilaiController extends Controller
 
         /*Mengambil semua data guru dan kelas */
         $guru = Guru::with('mapel')->get();
+        $nilai = Nilai::with('guru')->get();
         $kelas = Kelas::with('guru')->get();
 
         /*Jika pengguna adalah guru, ambil nilai berdasarkan guru yang sedang login */
@@ -50,9 +51,9 @@ class NilaiController extends Controller
      */
     public function create()
     {
-        $siswa = Siswa::all();
+       /* $siswa = Siswa::all();
         $tugas = Tugas::all();
-        return view('nilai.create', compact('siswa', 'tugas'));
+        return view('nilai.create', compact('siswa', 'tugas')); */
     }
 
     /**
@@ -63,41 +64,22 @@ class NilaiController extends Controller
      */
     public function store(Request $request)
     {
-        /*Validasi input dari request */
         $this->validate($request, [
             'guru_id' => 'required',
             'kelas_id' => 'required',
-            'siswa_id' => 'required',      // Menambahkan siswa_id untuk menyimpan nilai berdasarkan siswa
-            'tugas_id' => 'required',      // Menambahkan tugas_id untuk menyimpan nilai berdasarkan tugas
-            'nilai' => 'required|integer|min:0|max:100', // Validasi untuk nilai
-            'kkm' => 'nullable|integer|min:70|max:100',   // Validasi untuk KKM
         ], [
             'guru_id.required' => 'Guru harus dipilih',
             'kelas_id.required' => 'Kelas harus dipilih',
-            'siswa_id.required' => 'Siswa harus dipilih',
-        'tugas_id.required' => 'Tugas harus dipilih',
-        'nilai.required' => 'Nilai harus diisi',
-        'nilai.integer' => 'Nilai harus berupa angka',
-        'nilai.min' => 'Nilai minimal 0',
-        'nilai.max' => 'Nilai maksimal 100',
-        'kkm.integer' => 'KKM harus berupa angka',
-        'kkm.min' => 'KKM minimal 70',
-        'kkm.max' => 'KKM maksimal 100'
         ]);
 
-        /*Membuat data nilai baru */
         Nilai::create([
             'guru_id' => $request->guru_id,
-            'kelas_id' => $request->kelas_id,
-            'siswa_id' => $request->siswa_id,   // Menyimpan siswa_id
-            'tugas_id' => $request->tugas_id,   // Menyimpan tugas_id
-            'nilai' => $request->nilai,         // Menyimpan nilai
-            'kkm' => $request->kkm ?? 70,       // Menyimpan KKM, default 70 jika tidak diisi
+            'kelas_id' => $request->kelas_id
         ]);
 
-        /*Mengalihkan ke halaman indeks nilai */
         return redirect()->route('nilai.index')->with('success', 'Data berhasil disimpan');
     }
+
 
     /**
      * Menampilkan detail dari nilai yang ditentukan.
@@ -142,30 +124,7 @@ class NilaiController extends Controller
      */
     public function update(Request $request, Nilai $nilai)
 {
-    /* Validasi input dari request */
-    $this->validate($request, [
-        'nilai' => 'required|integer|min:0|max:100', // Validasi nilai
-        'kkm' => 'nullable|integer|min:70|max:100',   // Validasi KKM harus di antara 70 dan 100
-        'tugas_id' => 'required',                    // Validasi tugas_id
-    ], [
-        'nilai.required' => 'Nilai harus diisi',
-        'nilai.integer' => 'Nilai harus berupa angka',
-        'nilai.min' => 'Nilai minimal 0',
-        'nilai.max' => 'Nilai maksimal 100',
-        'kkm.integer' => 'KKM harus berupa angka',
-        'kkm.min' => 'Tidak Lulus',   // Pesan validasi untuk KKM
-        'kkm.max' => 'Lulus', // Pesan validasi untuk KKM
-        'tugas_id.required' => 'Tugas harus dipilih',
-    ]);
-
-    /* Memperbarui nilai */
-    $nilai->update([
-        'nilai' => $request->nilai,    // Memperbarui nilai
-        'kkm' => $request->kkm ?? 70,  // Memperbarui KKM, default 70 jika tidak diisi
-        'tugas_id' => $request->tugas_id, // Memperbarui tugas_id
-    ]);
-
-    return redirect()->route('nilai.index')->with('success', 'Data berhasil diperbarui');
+    //
 }
     /**
      * Menghapus nilai dari database
