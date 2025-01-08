@@ -52,27 +52,27 @@
                             <div class="card-description">Jadwal Pelajaran hari ini</div>
                         </div>
                         <div class="card-body p-0">
-                            <div class="card-body p-0">
-                                <div class="tickets-list">
-                                    @foreach ($jadwal as $data)
-                                        @if ($data->hari == $hari)
-                                            <div class="ticket-item">
-                                                <div class="ticket-title">
-                                                    <h4>{{ $data->kelas->nama_kelas }}</h4>
-                                                </div>
-                                                <div class="ticket-info">
-                                                    <div class="text-primary">Pada jam {{ $data->dari_jam }}</div>
-                                                </div>
+                            <div class="tickets-list">
+                                @foreach ($jadwal as $data)
+                                    @if ($data->hari == $hari)
+                                        <div class="ticket-item">
+                                            <div class="ticket-title">
+                                                <h4>{{ $data->kelas->nama_kelas }}</h4>
                                             </div>
-                                        @else
-                                            <div class="ticket-item">
-                                                <div class="ticket-title">
-                                                    <h4>Tidak ada jadwal hari ini</h4>
-                                                </div>
+                                            <div class="ticket-info">
+                                                <div>{{ $data->mapel->nama_mapel }}</div>
+                                                <div class="bullet"></div>
+                                                <div class="text-primary">Pada jam {{ $data->dari_jam }}</div>
                                             </div>
-                                        @endif
-                                    @endforeach
-                                </div>
+                                        </div>
+                                    @else
+                                        <div class="ticket-item">
+                                            <div class="ticket-title">
+                                                <h4>Tidak ada jadwal hari ini</h4>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
                             </div>
 
                         </div>
