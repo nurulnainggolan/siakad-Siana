@@ -10,7 +10,7 @@ class Mapel extends Model
     use HasFactory;
 
     /*Menentukan tabel yang dapat diisi secara massal */
-    protected $fillable = ['nama_mapel'];
+    protected $fillable = ['nama_mapel', 'jurusan_id'];
 
     /*Relasi guru dan mapel */
     public function jurusan()

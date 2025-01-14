@@ -32,7 +32,12 @@ class AbsensiController extends Controller
         } elseif (auth()->user()->roles == 'siswa') {
             /*ambil data absensi berdasarkan ID siswa*/
             $siswa = Siswa::where('user_id', auth()->user()->id)->first();
-            $absensi = Absensi::with('kelas', 'guru', 'meetings')->where('kelas_id', $siswa->id)->get();
+            $siswa = Siswa::where('user_id', auth()->user()->id)->first();
+            if ($siswa) {
+                $absensi = Absensi::with('kelas', 'guru', 'meetings')->where('kelas_id', $siswa->kelas_id)->get();
+            } else {
+                $absensi = [];
+            }
         } else {
             /*Jika pengguna bukan siswa atau guru, tampilkan semuanya (admin) */
             $absensi = Absensi::with('kelas', 'guru', 'meetings')->get();

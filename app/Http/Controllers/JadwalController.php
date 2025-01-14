@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guru;
 use App\Models\Jadwal;
 use App\Models\Kelas;
 use App\Models\Mapel;
@@ -16,8 +17,6 @@ class JadwalController extends Controller
      */
     public function index()
     {
-            
-        
         /*Mengambil semua jadwal dan mengurutkannya berdasarkan hari secara menurun */
         $jadwal = Jadwal::orderBy('hari', 'desc')->get();
 
@@ -63,6 +62,7 @@ class JadwalController extends Controller
             'hari' => 'required',
             'dari_jam' => 'required',
             'sampai_jam' => 'required',
+            'guru_id' => 'required',
         ], [
             /*Pesan error jika tidak diisi */
             'kelas_id.required' => 'Kelas wajib diisi',
@@ -71,6 +71,7 @@ class JadwalController extends Controller
             'hari.required' => 'Hari wajib diisi',
             'dari_jam.required' => 'Jam mulai wajib diisi',
             'sampai_jam.required' => 'Jam selesai wajib diisi',
+            'guru_id.required' => 'Guru wajib diisi',
         ]);
 
         /*Membuat jadwal baru */
@@ -80,6 +81,7 @@ class JadwalController extends Controller
             'hari' => $data['hari'],
             'dari_jam' => $data['dari_jam'],
             'sampai_jam' => $data['sampai_jam'],
+            'guru_id' => $data['guru_id'],
         ]);
 
         /*Mengalihkan kembali dengan pesan sukses */
@@ -117,11 +119,14 @@ class JadwalController extends Controller
         /*Mengambil semua data kelas dari database dan mengurutkan berdasarkan kelas secara menurun */
         $kelas = Kelas::orderBy('nama_kelas', 'desc')->get();
 
+        /*Mengambil semua data guru dari database dan mengurutkan berdasarkan nama secara menurun */
+        $guru = Guru::orderBy('nama', 'desc')->get();
+
         /*Mendefenisikan array yang berisi nama-nama hari dalam seminggu */
         $hari = ['senin', 'selasa', 'rabu', 'kamis', 'jumat'];
 
         /*Mengembalikan tampilanjadwal */
-        return view('pages.admin.jadwal.edit', compact('jadwal', 'mapel', 'kelas', 'hari'));
+        return view('pages.admin.jadwal.edit', compact('jadwal', 'mapel', 'kelas', 'guru', 'hari'));
     }
 
     /**
@@ -164,3 +169,4 @@ class JadwalController extends Controller
         return redirect()->back()->with('success', 'Jadwal berhasil dihapus');
     }
 }
+

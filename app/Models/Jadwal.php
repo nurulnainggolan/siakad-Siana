@@ -26,4 +26,9 @@ class Jadwal extends Model
     {
         return $this->belongsTo(Kelas::class, 'kelas_id', 'id');
     }
+
+    public function guru()
+    {
+        return $this->belongsTo(Guru::class, 'guru_id', 'id');
+    }
 }

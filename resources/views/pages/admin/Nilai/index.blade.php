@@ -11,7 +11,7 @@
                             <h4>List Nilai Siswa</h4>
                             @can('admin')
                                 <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i
-                                        class="nav-icon fas fa-folder-plus"></i>&nbsp; Tambah Data </button>
+                                        class="nav-icon fas fa-folder-plus"></i>&nbsp; Tambah Data Nilai </button>
                             @endcan
                         </div>
                         <div class="card-body">

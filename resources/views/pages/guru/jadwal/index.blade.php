@@ -33,6 +33,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Mata Pelajaran</th>
+                                            <th>Guru</th>
                                             <th>Kelas</th>
                                             <th>Hari</th>
                                             <th>Dari jam</th>

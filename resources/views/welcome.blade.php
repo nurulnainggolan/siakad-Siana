@@ -474,7 +474,7 @@ nav {
 }
 
 .footer {
-    background-color: var(--black);
+    background-color: var(--primary-color);
 }
 
 .footer__container {
@@ -641,7 +641,7 @@ nav {
                 <li class="link"><a href="#about">Tentang</a></li>
                 <li class="link"><a href="#stats">Kejuruan</a></li>
                 <li class="link"><a href="#blog">Galeri</a></li>
-                <li class="link"><a href="#subscribe">Testimoni</a></li>
+             
                 <li class="link"><a href="/login">Login</a></li>
 
             </ul>
@@ -762,7 +762,7 @@ nav {
             <h2 class="section__header">Momentum Kita</h2>
             <div class="blog__grid">
                 <div class="blog__card">
-                    <img src="assets/img/landing/padus.jpg" alt="blog" />
+                    <img src="assets/img/landing/padus1.jpg" alt="blog" />
                     <div>
                         <span><i class="ri-user-line"></i> By Padus</span>
                         <span><i class="ri-time-line"></i> Des 11, 2024</span>
@@ -775,7 +775,7 @@ nav {
                     </p>
                 </div>
                 <div class="blog__card">
-                    <img src="assets/img/landing/musikal.jpg" alt="blog" />
+                    <img src="assets/img/landing/musikal1.jpg" alt="blog" />
                     <div>
                         <span><i class="ri-user-line"></i> By TimSeni</span>
                         <span><i class="ri-time-line"></i> Oct 11, 2024</span>
@@ -787,7 +787,7 @@ nav {
                     </p>
                 </div>
                 <div class="blog__card">
-                    <img src="assets/img/landing/sumpah.jpg" alt="blog" />
+                    <img src="assets/img/landing/sumpah1.jpg" alt="blog" />
                     <div>
                         <span><i class="ri-user-line"></i> By OSIS</span>
                         <span><i class="ri-time-line"></i> OCT 29, 2024</span>
@@ -816,158 +816,68 @@ nav {
         </div>
     </section>
 
-    <section class="customer">
-        <div class="section__container customer__container">
-            <p class="section__subheader">Kata Alumni</p>
-            <h2 class="section__header">Apa Kata Alumni</h2>
-            <p class="para">
-                Temukan kesan dan cerita yang dibagikan oleh para alumni tentang pengalaman istimewa mereka 
-                selama menempuh pendidikan di SMKS St. Nahanson Parapat. Mereka berbagi bagaimana sekolah ini
-                 telah memberi fondasi yang kuat dan inspirasi bagi perjalanan karir mereka.
-            </p>
-            <div class="customer__review">
-                <!-- Slider main container -->
-                <div class="swiper swiper-autoplay">
-                    <div class="swiper-wrapper">
-                        <!-- Slides -->
-                        <div class="swiper-slide">
-                            <div class="customer__review__card">
-                                <span><i class="ri-double-quotes-r"></i></span>
-                                <p>
-                                    Halo semua, saya merasa sangat beruntung bisa belajar di SMKS St. Nahanson Parapat.
-                                    Sekolah ini memiliki fasilitas yang sangat memadai dan tenaga pengajar yang sangat profesional.
-                                    Saya sangat senang bisa belajar di sini dan mendapatkan pengalaman baru yang menarik.
-                                    Saya juga menjadi memiliki pengalaman magang di perusahaan ternama.
-                                </p>
-                                <div class="customer__review__details">
-                                    <img src="{{ asset('assets/img/landing/tungkot.jpg') }}" alt="stats" />
-                                    <div>
-                                        <h4>Tungkot Simorangkir</h4>
-                                        <h5>Universitas Telkom Surabaya</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="customer__review__card">
-                                <span><i class="ri-double-quotes-r"></i></span>
-                                <p>
-                                    In the construction industry, deadlines and quality are
-                                    non-negotiable. Induz consistently delivered on both fronts.
-                                    Their dedication to project management and their skilled
-                                    workforce made our project a seamless success. We're
-                                    grateful for their expertise.
-                                </p>
-                                <div class="customer__review__details">
-                                    <img src="assets/customer-2.jpg" alt="customer" />
-                                    <div>
-                                        <h4>Laura Rodriguez</h4>
-                                        <h5>CEO & Founder</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="customer__review__card">
-                                <span><i class="ri-double-quotes-r"></i></span>
-                                <p>
-                                    The logistics solutions provided by Induz have streamlined
-                                    our supply chain like never before. Their innovative
-                                    approach and attention to detail saved us time and
-                                    resources, ultimately boosting our bottom line. They're more
-                                    than a vendor; they're a partner in our success.
-                                </p>
-                                <div class="customer__review__details">
-                                    <img src="assets/customer-3.jpg" alt="customer" />
-                                    <div>
-                                        <h4>Mark Thompson</h4>
-                                        <h5>Architect</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- If we need pagination -->
-                    <div class="swiper-pagination"></div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
+
 
     <footer class="footer">
         <div class="section__container footer__container">
             <div class="footer__col">
-                <h5><a href="#">Induz.</a></h5>
-                <p>
-                    We strive to be at the forefront of technological advancements and
-                    industry best practices, consistently exceeding the expectations of
-                    our clients.
-                </p>
-                <div class="footer__socials">
-                    <a href="#"><i class="ri-facebook-fill"></i></a>
-                    <a href="#"><i class="ri-twitter-fill"></i></a>
-                    <a href="#"><i class="ri-instagram-line"></i></a>
-                    <a href="#"><i class="ri-linkedin-fill"></i></a>
+                <h5><a href="#">SiAna.</a></h5>
+            </div>
+            <div class="footer__col">
+                <h4>Menu</h4>
+                <div class="footer__links">
+                    <a href="#">Beranda</a>
+                    <a href="#">Tentang</a>
+                    <a href="#">Kejuruan</a>
+                    <a href="#">Galeri</a>
                 </div>
             </div>
             <div class="footer__col">
-                <h4>Quick Links</h4>
+                <h4>Kontak Kami</h4>
                 <div class="footer__links">
-                    <a href="#">Home</a>
-                    <a href="#">About Us</a>
-                    <a href="#">Services</a>
-                    <a href="#">Blog</a>
-                    <a href="#">Career</a>
+                    <a href="mailto:humas.smkstnahanson@gmail.com">Email</a>
+                    <a href="tel:+628116178817">Telepon</a>
+                    <a href="https://goo.gl/maps/9DdXm4cYH8qQm5tJ8" target="_blank">Lokasi</a>
                 </div>
             </div>
             <div class="footer__col">
-                <h4>Our Services</h4>
+                <h4>Selengkapnya</h4>
                 <div class="footer__links">
-                    <a href="#">Chemical Research</a>
-                    <a href="#">Construction Material</a>
-                    <a href="#">Agricultural Engineering</a>
-                    <a href="#">Bridge Engineering</a>
-                    <a href="#">Automative & Systems</a>
-                </div>
-            </div>
-            <div class="footer__col">
-                <h4>Help</h4>
-                <div class="footer__links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Support</a>
-                    <a href="#">Terms & Condition</a>
+                    <a href="https://www.facebook.com/smk.st.nahanson.parapat?mibextid=ZbWKwL">Facebook</a>
+                   
                 </div>
             </div>
         </div>
         <div class="footer__bar">
-            Copyright © 2023 Web Design Mastery. All rights reserved.
+            Copyright © 2025 SMKS St. Nahanson Parapat. @SiAna.
         </div>
     </footer>
 
     <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
-<!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js" integrity="sha384-DL8z2a6kVp+2IaQ6IyQFZyWZ0kHn6J4kG3T/RoJ9kU6x2nQgkO+HnJq3Yj5h/4+2R4fKfQhJk5J5" crossorigin="anonymous"></script>
 
-<!-- File JS Lokal -->
-<script src="{{ asset('assets/js/main.js') }}"></script>
+    <!-- File JS Lokal -->
+    <script src="{{ asset('assets/js/main.js') }}" defer></script>
 
 
-<!-- Script Swiper Initialization -->
-<script>
-    const swiper = new Swiper('.swiper-autoplay', {
-        loop: true, // Membuat slider loop
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        autoplay: {
-            delay: 3000, // Waktu antar slide (3 detik)
-            disableOnInteraction: false, // Tetap berjalan meskipun ada interaksi
-        },
-    });
-</>
+    <!-- Script Swiper Initialization -->
+    <script defer>
+        const swiper = new Swiper('.swiper-autoplay', {
+            loop: true, // Membuat slider loop
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            autoplay: {
+                delay: 3000, // Waktu antar slide (3 detik)
+                disableOnInteraction: false, // Tetap berjalan meskipun ada interaksi
+            },
+        });
+    </script>
 
 </body>
 

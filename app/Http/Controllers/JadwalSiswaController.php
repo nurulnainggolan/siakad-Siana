@@ -7,6 +7,8 @@ use App\Models\Jadwal;
 use App\Models\Kelas;
 use App\Models\Mapel;
 use Illuminate\Http\Request;
+use App\Models\Siswa;
+
 
 class JadwalSiswaController extends Controller
 {
@@ -16,30 +18,20 @@ class JadwalSiswaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        // Memeriksa apakah pengguna terautentikasi memiliki kelas
-        if (Auth::user()->kelas) {
-            // Mengambil ID kelas yang terautentikasi
-            $kelasID = Auth::user()->kelas->id;
-
-            // Mengambil semua jadwal yang sesuai dengan kelas_id dan mengurutkannya berdasarkan hari secara menurun
-            $jadwal = Jadwal::where('kelas_id', $kelasID)
-                            ->orderBy('hari', 'desc')
-                            ->get();
-        } else {
-            // Jika tidak ada kelas terkait, mengatur jadwal ke koleksi kosong
-            $jadwal = collect();
-        }
-
-        // Mengambil semua mata pelajaran dan mengurutkannya berdasarkan nama secara menurun
-        $mapel = Mapel::orderBy('nama_mapel', 'desc')->get();
-
-        // Mengambil semua kelas dan mengurutkannya berdasarkan nama secara menurun
-        $kelas = Kelas::orderBy('nama_kelas', 'desc')->get();
-
-        // Mengembalikan view dengan data jadwal, mata pelajaran, dan kelas
-        return view('pages.siswa.jadwal.index', compact('jadwal', 'mapel', 'kelas'));
+{
+    $kelas = Siswa::where('user_id', Auth::user()->id)->first();
+    if ($kelas) {
+        $jadwal = Jadwal::where('kelas_id', $kelas->kelas_id)->get();
+    } else {
+        $jadwal = collect();
     }
+
+    $mapel = Mapel::orderBy('nama_mapel', 'desc')->get();
+    $kelas = Kelas::orderBy('nama_kelas', 'desc')->get();
+
+    return view('pages.siswa.jadwal.index', compact('jadwal', 'mapel', 'kelas'));
+}
+
     /**
      * Menampilkan formulir untuk membuat resource
      *
